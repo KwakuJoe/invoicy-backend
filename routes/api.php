@@ -1,6 +1,8 @@
 <?php
 
 use App\Http\Controllers\AuthenticationController;
+use App\Http\Controllers\ClientController;
+use App\Http\Controllers\ProductController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -15,7 +17,7 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
+Route::middleware('auth:sanctum')->get('/auth/user', function (Request $request) {
     return $request->user();
 });
 
@@ -26,4 +28,20 @@ Route::controller(AuthenticationController::class)->group(function () {
     Route::post('auth/forget-password', 'forgetPassword');
     Route::get('auth/logout', 'logout')->middleware('auth:sanctum');
     Route::get('auth/send-email-verification/{email}', 'sendEmailVerifcation');
+});
+
+Route::middleware(['auth:sanctum'])->controller(ProductController::class)->group(function () {
+    Route::get('/products', 'index');
+    Route::get('/product/{id}', 'showProduct');
+    Route::post('/create-product', 'createProduct');
+    Route::post('/update-product/{id}', 'updateProduct');
+    Route::delete('/delete-product/{product_id}', 'deleteProduct');
+});
+
+Route::middleware(['auth:sanctum'])->controller(ClientController::class)->group(function () {
+    Route::get('/clients', 'index');
+    Route::get('/client/{id}', 'showProduct');
+    Route::post('/create-client', 'createProduct');
+    Route::post('/update-client/{id}', 'updateProduct');
+    Route::delete('/delete-client/{client_id}', 'deleteProduct');
 });
