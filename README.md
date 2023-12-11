@@ -1,65 +1,57 @@
 <p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
 
-<p align="center">
-<a href="https://github.com/laravel/framework/actions"><img src="https://github.com/laravel/framework/workflows/tests/badge.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
-</p>
+## Invoice Management API
 
-## About Laravel
+I recently developed a robust Invoice Management API using Laravel, empowering businesses with efficient tools for client, product, and invoice management. This API seamlessly integrates into backend systems, providing a range of features to streamline invoicing processes.
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+### Key Features:
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+#### Client Management:
+Centralized client management system to store and organize client details.
+Enables easy retrieval of client information for invoicing.
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+#### Product Management:
+Product catalog with details like name, price, and product code.
+Simplifies the invoicing process by associating products with invoices.
 
-## Learning Laravel
+#### Invoice Creation:
+Intuitive API endpoints for creating and managing invoices.
+Supports multiple line items, each associated with a specific product.
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
+#### Email Integration:
+Seamless email integration to send invoices directly to clients.
+Customizable email templates with dynamic links and attachments for easy invoice access and download.
 
-You may also try the [Laravel Bootcamp](https://bootcamp.laravel.com), where you will be guided through building a modern Laravel application from scratch.
+#### Tracking and Reporting:
+Robust tracking system to monitor invoices created for each client.
+Enables users to generate reports and gain insights into invoicing trends.
 
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains over 2000 video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+#### User-Friendly Interface:
+Well-designed API endpoints for a user-friendly experience.
+Intuitive data structures for easy interaction and integration into frontend applications.
 
-## Laravel Sponsors
+#### Technologies Used:
+Laravel: Backend framework for robust API development.
+PHP: Server-side scripting language for dynamic functionality.
+MySQL: Relational database for secure and efficient data storage.
 
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the [Laravel Partners program](https://partners.laravel.com).
+#### Outcome:
+This Invoice Management API not only simplifies the process of creating and managing invoices but also enhances communication by automating the email delivery of invoices to clients. Its versatility and user-friendly design make it an invaluable tool for businesses aiming to optimize their invoicing workflows.
 
-### Premium Partners
+#### Future Enhancements:
+Continued enhancements may include additional features such as invoice status tracking, payment processing integration, and a user-friendly administrative dashboard.
+Feel free to explore the demo or contact me to learn more about how this Invoice Management API can elevate your business processes.
+Adapt and customize this description based on your preferences and the specific details you'd like to highlight in your portfolio
 
-- **[Vehikl](https://vehikl.com/)**
-- **[Tighten Co.](https://tighten.co)**
-- **[WebReinvent](https://webreinvent.com/)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Curotec](https://www.curotec.com/services/technologies/laravel/)**
-- **[Cyber-Duck](https://cyber-duck.co.uk)**
-- **[DevSquad](https://devsquad.com/hire-laravel-developers)**
-- **[Jump24](https://jump24.co.uk)**
-- **[Redberry](https://redberry.international/laravel/)**
-- **[Active Logic](https://activelogic.com)**
-- **[byte5](https://byte5.de)**
-- **[OP.GG](https://op.gg)**
 
-## Contributing
-
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
-
-## Code of Conduct
-
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
-
-## Security Vulnerabilities
-
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
+### Setup
+#### Clone project
+#### rename .env.example to .env
+#### connect your MYSQL/Postgress Database
+#### run your migration
+#### run 'php artisan serve' to run the project
+#### open new cmd line tab, run "php artisan queue:work" to start the queue process for emails
+#### feel free to contac me if you need any asisstance
 
 ## License
 
