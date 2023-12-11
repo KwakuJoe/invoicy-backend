@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\AuthenticationController;
 use App\Http\Controllers\ClientController;
+use App\Http\Controllers\InvoiceController;
 use App\Http\Controllers\ProductController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -44,4 +45,14 @@ Route::middleware(['auth:sanctum'])->controller(ClientController::class)->group(
     Route::post('/create-client', 'createProduct');
     Route::post('/update-client/{id}', 'updateProduct');
     Route::delete('/delete-client/{client_id}', 'deleteProduct');
+});
+
+Route::middleware(['auth:sanctum'])->controller(InvoiceController::class)->group(function () {
+    Route::get('/invoices', 'index');
+    Route::get('/invoice/{invoice_id}', 'showInvoice');
+    Route::post('/create-invoice', 'createInvoice');
+    // Route::post('/update-invoice/{invoice_id}', 'updateInvoice');
+    Route::put('/update-invoice/{invoice_id}', 'updateInvoice');
+    Route::patch('/update-invoice-status/{invoice_id}', 'updateInvoiceStatus');
+    Route::delete('/delete-invoice/{invoice_id}', 'deleteInvoice');
 });

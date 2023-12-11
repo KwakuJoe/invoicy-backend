@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\AuthenticationController;
+use App\Http\Controllers\InvoiceController;
 use App\Http\Controllers\PasswordResetController;
 use Illuminate\Support\Facades\Route;
 
@@ -30,13 +31,9 @@ Route::get('/404', function () {
 
 // view route
 Route::get('/auth/verify-email-view/{token}', [AuthenticationController::class, 'verifyEmail'])->name('emailVerifiedView');
-
-//
-// Route::controller(PasswordResetController::class)->group(function () {
-//     Route::post('/auth/reset-password', 'updatePassword')->name('updatePassword');
-//     Route::get('/auth/reset-password/{token}/{email}', 'resetPassword')->name('resetPassword');
-// });
-
+// Reset password
 Route::post('/auth/reset-password', [PasswordResetController::class,'updatePassword'])->name('updatePassword');
 Route::get('/auth/reset-password/{token}/{email}', [PasswordResetController::class,'resetPassword'])->name('resetPassword');
 
+// generate invoice pdf / download
+Route::get('/generate-invoice-pdf/{invoice_id}', [InvoiceController::class, 'generateInvoicePDF'])->name('generateInvoicePDF');

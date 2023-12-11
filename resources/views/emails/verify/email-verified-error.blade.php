@@ -9,7 +9,13 @@
     <title>Email Verified Failed</title>
 
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
-
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Maven+Pro&display=swap');
+        body{font-family: 'Maven Pro', sans-serif; background-color: #f12369}
+        hr{color: #0000004f;margin-top: 5px;margin-bottom: 5px}.add td{color: #c5c4c4;text-transform: uppercase;font-size: 12px}.content{font-size: 14px}
+        .btn{background-color: #f12369}
+        h4{color: #f12369}
+    </style>
 </head>
 <body>
 
@@ -22,10 +28,10 @@
                 <img src="https://laravel.com/img/logomark.min.svg" alt="">
                 <img src="https://laravel.com/img/logotype.min.svg" alt="">
                 </div>
-                <h4 class="text-center fw-bold mt-3 text-danger">Error URL Link :(</h4>
+                <h4 class="text-center fw-bold mt-3 ">Error URL Link :(</h4>
                 <p class="text-center">Link could be expired or contain error, please retry the process agian?</p>
                 <div class="d-grid gap-2">
-                    <a class="btn btn-danger btn-lg">Go to Laravel play site</a>
+                    <a class="btn btn-lg">Go to Invoicy</a>
                 </div>
             </div>
         </div>

@@ -41,12 +41,11 @@ class ClientController extends Controller
         }
     }
 
-    public function showProduct($id){
+public function showProduct($id){
         try {
 
             $client = QueryBuilder::for(Client::class)->where('id', $id)
             ->allowedIncludes(['user']) // allowing relation
-            //->with('images') // adding it relation as many times
             ->with('user')
             ->first();
 

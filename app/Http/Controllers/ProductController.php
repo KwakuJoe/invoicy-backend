@@ -51,7 +51,6 @@ class ProductController extends Controller
 
             $product = QueryBuilder::for(Product::class)->where('id', $id)
             ->allowedIncludes(['user']) // allowing relation
-            //->with('images') // adding it relation as many times
             ->with('user')
             ->first();
 
