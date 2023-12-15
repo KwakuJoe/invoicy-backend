@@ -1,4 +1,4 @@
-# fly.toml app configuration file generated for invoicy-backend on 2023-12-03T22:09:32Z
+# fly.toml app configuration file generated for invoicy-backend on 2023-12-15T13:56:28Z
 #
 # See https://fly.io/docs/reference/configuration/ for information about how to use this file.
 #
@@ -13,12 +13,24 @@ console_command = "php /var/www/html/artisan tinker"
     PHP_VERSION = "8.2"
 
 [env]
+  AIVEN_API_TOKEN = "ilTklNiLLp/RulsmIDwOXv2qfPUQ4mt5Q/3grkN+tA9ay+DLDbnXtgufR5oIQHn/nKV5vhD36mxytyFJedO9/MudHmLQ6idstK9mJUkZK5fFJM+ZkNUQJROELWZ5wKyz3NNFhRaYCptpNQ1uQEgvVZEgAl3Pj1JqhxNE8NrpUhWoac9bL6MdDvzF19FCuP5nBYurGPgW1M314MVLiar+F5+UHP13tlvMMbiGFqydXk2IIhfiCYVFq59ua0LpsFho71dCd2uGmQ2TLjqGJXLHruID3NvuJESzvyOxdRPgCbqfp5/Br79UX3Z5YyVJJ8ojH7FcdW/UTCdpeWpRrntpSzMKFatNK2M852egX3dO6hRA5XswfFY="
   APP_ENV = "production"
+  APP_NAME = "Invoicy"
   LOG_CHANNEL = "stderr"
   LOG_LEVEL = "info"
   LOG_STDERR_FORMATTER = "Monolog\\Formatter\\JsonFormatter"
   SESSION_DRIVER = "cookie"
   SESSION_SECURE_COOKIE = "true"
+  QUEUE_CONNECTION= "database"
+  MAIL_MAILER= "smtp"
+  MAIL_HOST= "smtp.gmail.com"
+  MAIL_PORT= "587"
+  MAIL_USERNAME= "josephampah18@gmail.com"
+  MAIL_ENCRYPTION= "tls"
+  MAIL_FROM_ADDRESS= "support@invoicy.com"
+  MAIL_FROM_NAME= "Invoicy"
+
+
 
 [http_service]
   internal_port = 8080
@@ -27,6 +39,13 @@ console_command = "php /var/www/html/artisan tinker"
   auto_start_machines = true
   min_machines_running = 0
   processes = ["app"]
+
+[deploy]
+  release_command = "php artisan migrate --force"
+
+[processes]
+  app = ""
+  worker = "php artisan queue:work"
 
 [[vm]]
   cpu_kind = "shared"
