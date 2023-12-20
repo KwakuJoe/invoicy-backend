@@ -60,6 +60,7 @@ class InvoiceController extends Controller  {
 
             $invoice = QueryBuilder::for(Invoice::class)->where('id', $invoice_id)
             ->allowedIncludes(['invoice_items', 'user']) // allowing relation
+            ->with('invoice_items.product') // adding it relation as many times
             ->with('user') // adding it relation as many times
             ->with('invoice_items.product')
             ->first();
