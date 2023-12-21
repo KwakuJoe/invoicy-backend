@@ -49,6 +49,13 @@ public function showProduct($id){
             ->with('user')
             ->first();
 
+            if (!Gate::allows('authorized-user-client', $client)) {
+                return response()->json([
+                    'status' => 'failed',
+                    'message' => 'Authorization failed! You are not authorized to perform this action',
+                    'data' => null
+                ], 403);
+            }
 
             if(!$client){
                 return response()->json([

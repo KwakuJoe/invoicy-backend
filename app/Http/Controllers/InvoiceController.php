@@ -58,12 +58,21 @@ class InvoiceController extends Controller  {
 
         try{
 
+
             $invoice = QueryBuilder::for(Invoice::class)->where('id', $invoice_id)
             ->allowedIncludes(['invoice_items', 'user']) // allowing relation
             ->with('invoice_items.product') // adding it relation as many times
             ->with('user') // adding it relation as many times
             ->with('invoice_items.product')
             ->first();
+
+            if (!Gate::allows('authorized-user-invoice', $invoice)) {
+                return response()->json([
+                    'status' => 'failed',
+                    'message' => 'Authorization failed! You are not authorized to perform this action',
+                    'data' => null
+                ], 403);
+            }
 
             if(!$invoice){
 

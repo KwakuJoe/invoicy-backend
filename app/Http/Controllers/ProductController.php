@@ -54,6 +54,14 @@ class ProductController extends Controller
             ->with('user')
             ->first();
 
+            if (!Gate::allows('authorized-user-product', $product)) {
+                return response()->json([
+                    'status' => 'failed',
+                    'message' => 'Authorization failed! You are not authorized to perform this action',
+                    'data' => null
+                ], 403);
+            }
+
 
             if(!$product){
                 return response()->json([
