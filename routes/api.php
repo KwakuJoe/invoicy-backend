@@ -3,6 +3,7 @@
 use App\Http\Controllers\AuthenticationController;
 use App\Http\Controllers\ClientController;
 use App\Http\Controllers\InvoiceController;
+use App\Http\Controllers\PasswordResetController;
 use App\Http\Controllers\ProductController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -26,9 +27,15 @@ Route::middleware('auth:sanctum')->get('/auth/user', function (Request $request)
 Route::controller(AuthenticationController::class)->group(function () {
     Route::post('auth/register', 'register');
     Route::post('auth/login', 'login');
-    Route::post('auth/forget-password', 'forgetPassword');
+
     Route::get('auth/logout', 'logout')->middleware('auth:sanctum');
     Route::get('auth/send-email-verification/{email}', 'sendEmailVerifcation');
+});
+
+Route::controller(PasswordResetController::class)->group(function () {
+    Route::post('auth/forget-password', 'forgetPassword');
+    Route::get('auth/reset-password/{token}/{expiry}/{email}/', 'resetPassword')->name('resetPassword');
+    Route::post('auth/update-password', 'updatePassword');
 });
 
 Route::middleware(['auth:sanctum'])->controller(ProductController::class)->group(function () {

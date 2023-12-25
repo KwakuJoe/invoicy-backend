@@ -31,9 +31,7 @@ Route::get('/404', function () {
 
 // view route
 Route::get('/auth/verify-email-view/{token}', [AuthenticationController::class, 'verifyEmail'])->name('emailVerifiedView');
-// Reset password
-Route::post('/auth/reset-password', [PasswordResetController::class,'updatePassword'])->name('updatePassword');
-Route::get('/auth/reset-password/{token}/{email}', [PasswordResetController::class,'resetPassword'])->name('resetPassword');
+
 
 // generate invoice pdf / download
 Route::get('/generate-invoice-pdf/{invoice_id}', [InvoiceController::class, 'generateInvoicePDF'])->name('generateInvoicePDF');

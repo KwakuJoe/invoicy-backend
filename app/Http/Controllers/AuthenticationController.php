@@ -17,6 +17,8 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Crypt;
 use Illuminate\Support\Facades\URL;
 use Illuminate\Support\Str;
+use Spatie\QueryBuilder\QueryBuilder;
+
 
 class AuthenticationController extends Controller
 {
@@ -214,78 +216,6 @@ class AuthenticationController extends Controller
             return view('emails.verify.email-verified');
     }
 
-    public function forgetPassword(ForgetPasswordRequest $request){
-
-        try {
-
-            $validated = $request->validated();
-            // find user email in db
-
-            $user = User::where("email", $validated["email"])->first();
-
-            if(!$user){
-
-                return response()->json([
-                    'status' => 'failed',
-                    'message'=> 'This email does not associate with any account',
-                    'data' => null
-                ], 404);
-
-            }
-
-            // generate expiry url link with token and users/email
-            $random = str::random(10);
-            $token = Crypt::encryptString($random);
-            $dateTime = Carbon::now();
-
-
-            $url =  URL::temporarySignedRoute(
-                'resetPassword', now()->addMinutes(30),
-                [
-                    'token' => $token,
-                    'email' => $user->email
-                ]
-            );
-
-            // $message  = [
-            //     'title' => 'Password Reset',
-            //     'message' =>'Hello '. $user->name . ' The following url will direct to the page where you would rest your password',
-            //     'url' => $url
-            // ];
-
-            $passResetToken = PasswordResetTokens::updateOrCreate(
-                ['email'=> $validated['email']],
-                [
-                    'email' => $validated['email'],
-                    'token' => $token,
-                    'created_at' => $dateTime,
-                ]
-            );
-
-             // send notification using queues
-             PasswordResetJob::dispatch($user, $url);
-            //  $user->notify(new PasswordResetNotifier($user, $url));
-
-            return response()->json([
-                'status' => 'success',
-                'message' => 'Password rest link sent to your email',
-                'data' => $passResetToken,
-                'user' => $user,
-            ], 200);
-
-
-            // $user->password = bcrypt($validated['password']);
-
-
-        } catch (\Exception $e) {
-
-            return response()->json([
-                'status' => 'failed',
-                'message' => $e->getMessage(),
-                'data' => null
-            ], 200);
-        }
-    }
 
 
 }
