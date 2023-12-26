@@ -27,7 +27,7 @@ Route::middleware('auth:sanctum')->get('/auth/user', function (Request $request)
 Route::controller(AuthenticationController::class)->group(function () {
     Route::post('auth/register', 'register');
     Route::post('auth/login', 'login');
-
+    Route::post('auth/update-profile', 'updateProfile');
     Route::get('auth/logout', 'logout')->middleware('auth:sanctum');
     Route::get('auth/send-email-verification/{email}', 'sendEmailVerifcation');
 });

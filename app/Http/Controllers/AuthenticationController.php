@@ -18,6 +18,8 @@ use Illuminate\Support\Facades\Crypt;
 use Illuminate\Support\Facades\URL;
 use Illuminate\Support\Str;
 use Spatie\QueryBuilder\QueryBuilder;
+use Illuminate\Support\Facades\Storage;
+
 
 
 class AuthenticationController extends Controller
@@ -214,6 +216,76 @@ class AuthenticationController extends Controller
 
             // show this page
             return view('emails.verify.email-verified');
+    }
+
+    public function updateProfile(Request $request){
+
+        try{
+
+            $request->validate([
+                'id' => 'required | numeric | exists:users,id',
+                'organisation' => 'sometimes|string',
+                'email' => 'sometimes|email',
+                'phone' => 'sometimes|numeric',
+                'bio' => 'sometimes|string',
+                'address' => 'sometimes|string',
+                'avatar' => 'sometimes|image|mimes:jpeg,png,gif|max:5120',
+            ]);
+
+            $user = User::where("id", $request->id)->first();
+
+            if(!$user){
+
+                return response()->json([
+                    'status'=> 'failed',
+                    'message'=> 'Failed to find user with this account',
+                    'data' => null
+                ], 404);
+
+            }
+
+            if($request->hasFile('avatar')){
+
+                $name = str()->uuid(). '.' . $request->avatar->getClientOriginalExtension();
+                $destination_path = 'images/avatars';
+
+                // check if user have avatar and delete it
+                if($user->avatar){
+                    $old_user_avatar = $user->avatar;
+                    Storage::delete($old_user_avatar);
+                }
+                //get path and store new avatar image
+                 $path = $request->avatar->storeAs($destination_path, $name);
+
+                 // store
+                 $user->avatar = $path;
+
+            }
+
+                $user->organisation = $request->organisation;
+                $user->email = $request->email;
+                $user->phone  = $request->phone;
+                $user->bio = $request->bio;
+                $user->address = $request->address;
+
+                $user->save();
+
+                return response()->json([
+                    'status'=> 'success',
+                    'message'=> 'User profile updated successfully',
+                    'data' => $user
+                ], 200);
+
+        }catch(\Exception $e){
+
+            return response()->json([
+                'status'=> 'failed',
+                'message'=> $e->getMessage(),
+                'data' => null
+            ], 500);
+
+        }
+
     }
 
 
