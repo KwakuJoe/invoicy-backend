@@ -21,6 +21,7 @@ class Invoice extends Model
         'client_email',
         'client_phone',
         'client_alternate_phone',
+        'sub_total',
         'total_amount',
         'delivery_amount',
         'additional_information',

@@ -164,7 +164,9 @@ class InvoiceController extends Controller  {
             }
 
             // add the set delivery to the total
-            $total_amount += $validated['delivery_amount'];
+            $delivery_amount = $validated['delivery_amount'];
+            $total_amount += $delivery_amount;
+            $sub_total = $total_amount - $delivery_amount;
 
             // since the total amount is created later, then we have to update the invoice
             $updated_invoice = QueryBuilder::for(Invoice::class)->where('id', $invoice->id)
@@ -174,6 +176,7 @@ class InvoiceController extends Controller  {
             ->first();
 
             $updated_invoice->total_amount = $total_amount;
+            $updated_invoice->sub_total = $sub_total;
 
             $updated_invoice->save();
 

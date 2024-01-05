@@ -90,14 +90,20 @@ class AuthenticationController extends Controller
             $user->save();
 
             // generate a signe url
-            $url =  URL::temporarySignedRoute(
-                'emailVerifiedView',
-                now()->addMinutes(30),
-                ['token' => $email_token],
-            );
+            // generate expiry url link with token and users/email
+            $random = $token = Str::random(10);
+            $token = Crypt::encryptString($random);
+            // $dateTime = Carbon::now();
+
+            //createing signed url
+            $frontendUrl = env('FRONTEND_URL');
+            $expires = now()->addMinutes(30); // The link will expire in 30 minutes
+            // $signature = hash_hmac('sha256', $user->email, 'invoice@secret.com'); // Replace 'your-secret-key' with your actual secret key
+            $fullSignature = $token . '/' . $expires->timestamp . '/' . $user->email;
+            $signedUrl = $frontendUrl . '/auth/verified/' . $fullSignature;
 
             // send notification using queues
-            UserCreatedJob::dispatch($user, $url);
+            UserCreatedJob::dispatch($user, $signedUrl);
 
 
             return response()->json([

@@ -25,6 +25,7 @@ return new class extends Migration
             $table->string('client_phone');
             $table->string('client_alternate_phone');
             $table->decimal('total_amount');
+            $table->decimal('sub_total');
             $table->decimal('delivery_amount');
             $table->text('additional_information');
             $table->string('status')->default(InvoiceStatusEnum::PROCESSING);
