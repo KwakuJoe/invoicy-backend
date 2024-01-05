@@ -30,6 +30,7 @@ Route::controller(AuthenticationController::class)->group(function () {
     Route::post('auth/update-profile', 'updateProfile');
     Route::get('auth/logout', 'logout')->middleware('auth:sanctum');
     Route::get('auth/send-email-verification/{email}', 'sendEmailVerifcation');
+    Route::get('auth/verify-email/{token}/{expiry}/{email}', 'verifyEmail');
 });
 
 Route::controller(PasswordResetController::class)->group(function () {

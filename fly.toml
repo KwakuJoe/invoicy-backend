@@ -44,7 +44,6 @@ console_command = "php /var/www/html/artisan tinker"
 
 [deploy]
   release_command = "php artisan migrate --force"
-  storage_link_command = "php artisan storage:link"
 
 [processes]
   app = ""

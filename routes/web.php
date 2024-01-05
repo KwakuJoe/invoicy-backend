@@ -30,7 +30,6 @@ Route::get('/404', function () {
 })->name('404');
 
 // view route
-Route::get('/auth/verify-email-view/{token}', [AuthenticationController::class, 'verifyEmail'])->name('emailVerifiedView');
 
 
 // generate invoice pdf / download
