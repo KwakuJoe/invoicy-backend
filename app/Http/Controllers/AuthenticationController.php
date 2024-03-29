@@ -38,7 +38,7 @@ class AuthenticationController extends Controller
                     "status" => "failed",
                     "message" => "Invalid credential, please try again",
                     "data" => null
-                ], 200);
+                ], 401);
             }
             //else find user and generate tokens give am
             $user = User::where("email", $credentials["email"])->first();
@@ -63,7 +63,7 @@ class AuthenticationController extends Controller
                     'token' => null,
                     'token_type' => null,
                 ]
-            ], 200);
+            ], 500);
         }
     }
 
@@ -123,7 +123,7 @@ class AuthenticationController extends Controller
                     'token' => null,
                     'token_type' => null,
                 ]
-            ], 200);
+            ], 500);
         }
     }
 
@@ -262,7 +262,7 @@ class AuthenticationController extends Controller
                 'status' => 'failed',
                 'message' => $e->getMessage(),
                 'data' => null
-            ], 200);
+            ], 500);
         }
     }
 

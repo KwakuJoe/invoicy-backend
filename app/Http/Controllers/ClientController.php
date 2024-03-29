@@ -76,7 +76,7 @@ public function showProduct($id){
                 'status'=> 'success',
                 'message'=> $e->getMessage(),
                 'data'=> null
-            ], 200);
+            ], 500);
          }
     }
 
